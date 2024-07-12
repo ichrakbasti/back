@@ -1,0 +1,62 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: symfony_app
+    restart: unless-stopped
+    working_dir: /code
+    volumes:
+      - ./app:/code
+    networks:
+      - symfony
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:alpine
+    container_name: symfony_nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+
+    volumes:
+      - ./app:/code
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - symfony
+    depends_on:
+      - app
+
+  db:
+    image: postgres:13
+    container_name: symfony_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: symfony
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - symfony
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    networks:
+      - symfony
+
+networks:
+  symfony:
+
+volumes:
+  postgres_data:

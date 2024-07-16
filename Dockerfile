@@ -12,9 +12,9 @@ RUN apt-get update && apt-get install -y \
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_pgsql mbstring zip exif pcntl
-
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+#
+## Install Composer
+#COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copier les fichiers de l'application Symfony dans le conteneur
 #COPY . /code
@@ -26,6 +26,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 #WORKDIR /code
 
-
-# Install Symfony Flex and other dependencies
-RUN composer install --no-scripts --no-autoloader && composer dump-autoload --optimize
+#
+## Install Symfony Flex and other dependencies
+#RUN composer install --no-scripts --no-autoloader && composer dump-autoload --optimize

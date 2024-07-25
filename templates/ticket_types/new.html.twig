@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TicketTypes{% endblock %}
+
+{% block body %}
+    <h1>Create new TicketTypes</h1>
+
+    {{ include('ticket_types/_form.html.twig') }}
+
+    <a href="{{ path('app_ticket_types_index') }}">back to list</a>
+{% endblock %}

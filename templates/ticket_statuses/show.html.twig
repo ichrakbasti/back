@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TicketStatuses{% endblock %}
+
+{% block body %}
+    <h1>TicketStatuses</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ticket_status.id }}</td>
+            </tr>
+            <tr>
+                <th>StatusName</th>
+                <td>{{ ticket_status.statusName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ticket_statuses_index') }}">back to list</a>
+
+    <a href="{{ path('app_ticket_statuses_edit', {'id': ticket_status.id}) }}">edit</a>
+
+    {{ include('ticket_statuses/_delete_form.html.twig') }}
+{% endblock %}

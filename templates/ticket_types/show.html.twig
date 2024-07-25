@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TicketTypes{% endblock %}
+
+{% block body %}
+    <h1>TicketTypes</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ticket_type.id }}</td>
+            </tr>
+            <tr>
+                <th>TypeName</th>
+                <td>{{ ticket_type.typeName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ticket_types_index') }}">back to list</a>
+
+    <a href="{{ path('app_ticket_types_edit', {'id': ticket_type.id}) }}">edit</a>
+
+    {{ include('ticket_types/_delete_form.html.twig') }}
+{% endblock %}

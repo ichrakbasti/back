@@ -27,10 +27,10 @@ class Tickets
     #[ORM\ManyToOne(inversedBy: 'tickets')]
     private ?TicketTypes $type = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $subject = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $priority = null;
 
     #[ORM\Column]
@@ -45,19 +45,19 @@ class Tickets
     #[ORM\OneToMany(targetEntity: Tags::class, mappedBy: 'tickets')]
     private Collection $tag;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $channel = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $via = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $customer = null;
 
     #[ORM\Column]
     private ?bool $active = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $countryCode = null;
 
     #[ORM\Column]
@@ -71,6 +71,9 @@ class Tickets
 
     #[ORM\Column]
     private ?\DateTimeImmutable $lastMessageDatetime = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $contactReason = null;
 
     public function __construct()
     {
@@ -315,4 +318,17 @@ class Tickets
 
         return $this;
     }
+
+    public function getContactReason(): ?string
+    {
+        return $this->contactReason;
+    }
+
+    public function setContactReason(string $contactReason): static
+    {
+        $this->contactReason = $contactReason;
+
+        return $this;
+    }
+
 }

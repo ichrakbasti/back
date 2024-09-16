@@ -1,0 +1,15 @@
+nelmio_cors:
+    defaults:
+        allow_origin: [ '*' ] # Autorise tous les domaines à accéder à l'API
+        allow_methods: [ 'GET', 'POST', 'PUT', 'DELETE', 'OPTIONS' ]
+        allow_headers: [ 'Content-Type', 'Authorization' ]
+        expose_headers: [ 'Link' ]
+        max_age: 3600
+    paths:
+#        '^/': null
+        '^/api/': # Limite aux routes commençant par /api/
+            allow_origin: [ 'http://localhost:4200' ] # Autorise seulement localhost:4200
+            allow_methods: [ 'GET', 'POST', 'PUT', 'DELETE', 'OPTIONS' ]
+            allow_headers: [ 'Content-Type', 'Authorization' ]
+            expose_headers: [ 'Link' ]
+            max_age: 3600

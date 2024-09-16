@@ -15,14 +15,20 @@ class TicketTypes
     #[ORM\Column]
     private ?int $id = null;
 
+
+    #[ORM\Column(nullable: true)]
+    private ?int $IntegrationId = null;
     #[ORM\Column(length: 255)]
-    private ?string $typeName = null;
+    private ?string $name = null;
 
     /**
      * @var Collection<int, Tickets>
      */
     #[ORM\OneToMany(targetEntity: Tickets::class, mappedBy: 'type')]
     private Collection $tickets;
+
+    #[ORM\Column(length: 255)]
+    private ?string $type = null;
 
     public function __construct()
     {
@@ -34,14 +40,14 @@ class TicketTypes
         return $this->id;
     }
 
-    public function getTypeName(): ?string
+    public function getName(): ?string
     {
-        return $this->typeName;
+        return $this->name;
     }
 
-    public function setTypeName(string $typeName): static
+    public function setName(string $name): static
     {
-        $this->typeName = $typeName;
+        $this->name = $name;
 
         return $this;
     }
@@ -75,4 +81,29 @@ class TicketTypes
 
         return $this;
     }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getIntegrationId(): ?int
+    {
+        return $this->IntegrationId;
+    }
+
+    public function setIntegrationId(?int $IntegrationId): static
+    {
+        $this->IntegrationId = $IntegrationId;
+
+        return $this;
+    }
+
 }

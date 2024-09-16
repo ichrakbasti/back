@@ -1,0 +1,1647 @@
+{
+  "object": "list",
+  "uri": "/api/integrations?limit=100&order_by=created_datetime%3Adesc",
+  "data": [
+    {
+      "id": 122226,
+      "created_datetime": "2024-08-15T10:21:25.873567+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": "",
+      "http": {
+        "id": 9348,
+        "form": "{{context}}",
+        "method": "POST",
+        "request_content_type": "application/json",
+        "response_content_type": "application/json",
+        "triggers": {
+          "ticket-created": true,
+          "ticket-updated": true,
+          "ticket-message-created": true,
+          "ticket-self-unsnoozed": true
+        },
+        "url": "https://n8n.manucurist.com/webhook-test/0e4810e9-f964-4ca9-8a07-4576b1147c0b"
+      },
+      "locked_datetime": null,
+      "meta": {
+        "failures": 0
+      },
+      "name": "Dashboards",
+      "type": "http",
+      "updated_datetime": "2024-08-26T14:32:57.213574+00:00",
+      "user": {
+        "id": 477459838
+      },
+      "uri": "/api/integrations/122226/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 121874,
+      "created_datetime": "2024-07-24T10:06:08.641222+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "address": "help-center|tjzrjekb"
+      },
+      "name": "manucurist-fr EN",
+      "type": "app",
+      "updated_datetime": "2024-07-24T10:06:22.173509+00:00",
+      "user": {
+        "id": 553823184
+      },
+      "uri": "/api/integrations/121874/",
+      "application_id": "64477b74ef4b17779400138d",
+      "managed": false
+    },
+    {
+      "id": 121873,
+      "created_datetime": "2024-07-24T10:04:22.897135+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "address": "help-center|z33kgw6r"
+      },
+      "name": "manucurist-fr NL",
+      "type": "app",
+      "updated_datetime": "2024-07-24T10:04:39.880996+00:00",
+      "user": {
+        "id": 553823184
+      },
+      "uri": "/api/integrations/121873/",
+      "application_id": "64477b74ef4b17779400138d",
+      "managed": false
+    },
+    {
+      "id": 121872,
+      "created_datetime": "2024-07-24T10:03:10.256649+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "address": "help-center|kk0ofi0k"
+      },
+      "name": "manucurist-fr DE",
+      "type": "app",
+      "updated_datetime": "2024-07-24T10:03:26.672728+00:00",
+      "user": {
+        "id": 553823184
+      },
+      "uri": "/api/integrations/121872/",
+      "application_id": "64477b74ef4b17779400138d",
+      "managed": false
+    },
+    {
+      "id": 121871,
+      "created_datetime": "2024-07-24T10:00:02.139591+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "address": "help-center|x81zvwo6"
+      },
+      "name": "manucurist-fr ES",
+      "type": "app",
+      "updated_datetime": "2024-07-24T10:01:50.165686+00:00",
+      "user": {
+        "id": 553823184
+      },
+      "uri": "/api/integrations/121871/",
+      "application_id": "64477b74ef4b17779400138d",
+      "managed": false
+    },
+    {
+      "id": 121870,
+      "created_datetime": "2024-07-24T09:43:03.335063+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "address": "help-center|iq44g4k8"
+      },
+      "name": "manucurist-fr IT",
+      "type": "app",
+      "updated_datetime": "2024-07-24T10:02:08.167732+00:00",
+      "user": {
+        "id": 553823184
+      },
+      "uri": "/api/integrations/121870/",
+      "application_id": "64477b74ef4b17779400138d",
+      "managed": false
+    },
+    {
+      "id": 121402,
+      "created_datetime": "2024-06-20T14:17:31.158027+00:00",
+      "deactivated_datetime": "2024-06-20T14:19:39+00:00",
+      "decoration": null,
+      "description": "",
+      "http": {
+        "id": 8938,
+        "form": "",
+        "method": "GET",
+        "request_content_type": "application/json",
+        "response_content_type": "application/json",
+        "triggers": {
+          "ticket-created": true,
+          "ticket-updated": true,
+          "ticket-message-created": true,
+          "ticket-self-unsnoozed": false
+        },
+        "url": "https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3Dgoogle%26rlz%3D1C1PNJJ_frTN1050TN1051%26oq%3Dgoogle%26gs_lcrp%3DEgZjaHJvbWUyBggAEEUYOTIHCAEQABiPAjIHCAIQABiPAjIGCAMQRRg8MgYIBBBFGDwyBggFEEUYQTIGCAYQRRhBMgYIBxBFGEHSAQg2NjIyajBqMagCALACAQ%26sourceid%3Dchrome%26ie%3DUTF-8&ec=futura_gmv_dt_so_72586115_e&hl=fr&ifkv=AS5LTARfySziSIhoPJw8j5EsqCqzMzCpvDosdaD-bs3jzh78KY3--JifxsbU4IycXdc2C_k_EKJ5&passive=true&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-1978838867%3A1718892853174306&ddm=0"
+      },
+      "locked_datetime": null,
+      "meta": {
+        "failures": 6
+      },
+      "name": "Google My business",
+      "type": "http",
+      "updated_datetime": "2024-06-20T14:19:35.193690+00:00",
+      "user": {
+        "id": 414885262
+      },
+      "uri": "/api/integrations/121402/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 121278,
+      "created_datetime": "2024-06-10T13:39:16.318093+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "address": "contact-form|9avx9dax"
+      },
+      "name": "Contact us!",
+      "type": "app",
+      "updated_datetime": "2024-06-10T13:39:16.318097+00:00",
+      "user": {
+        "id": 557713466
+      },
+      "uri": "/api/integrations/121278/",
+      "application_id": "6569be23fbff9b7c6f2a33e4",
+      "managed": false
+    },
+    {
+      "id": 121277,
+      "created_datetime": "2024-06-10T13:31:15.373416+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "address": "contact-form|ryedinw6"
+      },
+      "name": "Contact us",
+      "type": "app",
+      "updated_datetime": "2024-06-10T13:31:15.373421+00:00",
+      "user": {
+        "id": 557713466
+      },
+      "uri": "/api/integrations/121277/",
+      "application_id": "6569be23fbff9b7c6f2a33e4",
+      "managed": false
+    },
+    {
+      "id": 121216,
+      "created_datetime": "2024-06-04T12:35:56.223968+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "address": "contact-form|nujwpwov"
+      },
+      "name": "Contactez-nous / Contact us",
+      "type": "app",
+      "updated_datetime": "2024-06-10T13:32:06.560183+00:00",
+      "user": {
+        "id": 557713466
+      },
+      "uri": "/api/integrations/121216/",
+      "application_id": "6569be23fbff9b7c6f2a33e4",
+      "managed": false
+    },
+    {
+      "id": 121155,
+      "created_datetime": "2024-05-31T01:34:19.922645+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "address": "help-center|18fbil3b"
+      },
+      "name": "manucurist-us",
+      "type": "app",
+      "updated_datetime": "2024-05-31T01:34:19.922650+00:00",
+      "user": {
+        "id": 553823184
+      },
+      "uri": "/api/integrations/121155/",
+      "application_id": "64477b74ef4b17779400138d",
+      "managed": false
+    },
+    {
+      "id": 121154,
+      "created_datetime": "2024-05-31T01:08:00.078466+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "address": "help-center|ocdxx7r8"
+      },
+      "name": "manucurist-uk",
+      "type": "app",
+      "updated_datetime": "2024-05-31T01:08:00.078470+00:00",
+      "user": {
+        "id": 553823184
+      },
+      "uri": "/api/integrations/121154/",
+      "application_id": "64477b74ef4b17779400138d",
+      "managed": false
+    },
+    {
+      "id": 121152,
+      "created_datetime": "2024-05-30T22:46:05.146267+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "address": "help-center|eyq5g89l"
+      },
+      "name": "manucurist-fr",
+      "type": "app",
+      "updated_datetime": "2024-05-31T01:05:24.294828+00:00",
+      "user": {
+        "id": 553823184
+      },
+      "uri": "/api/integrations/121152/",
+      "application_id": "64477b74ef4b17779400138d",
+      "managed": false
+    },
+    {
+      "id": 120668,
+      "created_datetime": "2024-04-25T16:02:27.130595+00:00",
+      "deactivated_datetime": null,
+      "decoration": {
+        "yuma": "ticket-message-created"
+      },
+      "description": "Widget",
+      "http": {
+        "id": 8669,
+        "form": "{{context}}",
+        "method": "POST",
+        "request_content_type": "application/json",
+        "response_content_type": "application/json",
+        "triggers": {
+          "ticket-created": false,
+          "ticket-updated": false,
+          "ticket-message-created": true
+        },
+        "url": "https://api.yuma.ai/gorgias/ai/88206b9c19a101ebf48f5a197cdb686792925b9e/tickets/{{ticket.id}}/new_ticket"
+      },
+      "locked_datetime": null,
+      "meta": {
+        "failures": 0
+      },
+      "name": "Yuma - Widget",
+      "type": "http",
+      "updated_datetime": "2024-08-29T20:04:23.688474+00:00",
+      "user": {
+        "id": 410016835
+      },
+      "uri": "/api/integrations/120668/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 119561,
+      "created_datetime": "2024-02-22T10:47:55.506147+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "oauth": {
+          "status": "success"
+        },
+        "import_state": {
+          "is_over": true,
+          "oldest_created_at": "2024-09-02T08:36:48Z"
+        },
+        "yotpo_account_id": "Ow1nCoh66nuWis2l2Z0eJ4gdUi2gFhNGbLko0Z7m",
+        "enable_yotpo_tickets": true
+      },
+      "name": "Yotpo account US",
+      "type": "yotpo",
+      "updated_datetime": "2024-09-02T08:37:53.882237+00:00",
+      "user": {
+        "id": 410016835
+      },
+      "uri": "/api/integrations/119561/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 119560,
+      "created_datetime": "2024-02-22T10:44:37.697924+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "oauth": {
+          "status": "success"
+        },
+        "import_state": {
+          "is_over": true
+        },
+        "yotpo_account_id": "hXXMbiL7ZNk1kTqkDa0buljvnAPZriLZckl9o5zW",
+        "enable_yotpo_tickets": true
+      },
+      "name": "Yotpo account 3",
+      "type": "yotpo",
+      "updated_datetime": "2024-02-22T11:01:35.738652+00:00",
+      "user": {
+        "id": 410016835
+      },
+      "uri": "/api/integrations/119560/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 119559,
+      "created_datetime": "2024-02-22T10:43:57.461596+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "oauth": {
+          "status": "success"
+        },
+        "import_state": {
+          "is_over": true,
+          "oldest_created_at": "1970-01-01T00:00:00"
+        },
+        "yotpo_account_id": "9NxUUZ82c0mGvjCJRlKce3jJ5I6sdpex1oDOeicm",
+        "enable_yotpo_tickets": true
+      },
+      "name": "Yotpo account UK",
+      "type": "yotpo",
+      "updated_datetime": "2024-09-02T08:36:50.937911+00:00",
+      "user": {
+        "id": 410016835
+      },
+      "uri": "/api/integrations/119559/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 119558,
+      "created_datetime": "2024-02-22T10:41:45.835418+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "oauth": {
+          "status": "success"
+        },
+        "import_state": {
+          "is_over": true,
+          "oldest_created_at": "2024-09-02T08:36:48Z"
+        },
+        "yotpo_account_id": "IKDmHiCoJJXhC3FSjdGiJch4IHuKTFKYNq8yLV2K",
+        "enable_yotpo_tickets": true
+      },
+      "name": "Yotpo account",
+      "type": "yotpo",
+      "updated_datetime": "2024-09-02T08:37:52.818194+00:00",
+      "user": {
+        "id": 410016835
+      },
+      "uri": "/api/integrations/119558/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 115193,
+      "created_datetime": "2023-07-26T12:08:30.851976+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": "",
+      "http": {
+        "id": 7654,
+        "form": "",
+        "method": "GET",
+        "request_content_type": "application/json",
+        "response_content_type": "application/json",
+        "triggers": {
+          "ticket-created": true,
+          "ticket-updated": true,
+          "ticket-message-created": true
+        },
+        "url": "https://authenticate.trustpilot.com/?response_type=code&client_id=QgDiULTGeENbhCVk72NdkcRpljK5TaGB&redirect_uri=https%3A%2F%2Fapi.pandium.io%2Fv0%2Fauthor%2Fcallback%2Foauth2&state=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb25uZWN0b3JfbmFtZSI6InRydXN0cGlsb3QiLCJuYW1lc3BhY2UiOiJwcm9kLWdvcmdpYXMiLCJpbnRlZ3JhdGlvbl9uYW1lIjoidHJ1c3RwaWxvdDJnb3JnaWFzIiwidGVuYW50X2lkIjoiMzY0MjIiLCJ0ZW5hbnRfbmFtZSI6bnVsbCwiZm9ybV9kYXRhIjpudWxsLCJpc3MiOiJQYW5kaXVtIn0.eahUPPEiKlOnwLA1cqH9Bxdft6UbiaxKpABgpUROHOg"
+      },
+      "locked_datetime": null,
+      "meta": {
+        "failures": 0
+      },
+      "name": "Trustpilot",
+      "type": "http",
+      "updated_datetime": "2024-08-29T08:07:23.558844+00:00",
+      "user": {
+        "id": 410016835
+      },
+      "uri": "/api/integrations/115193/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 114810,
+      "created_datetime": "2023-07-03T10:22:19.002367+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": "Alertes Shipup",
+      "http": {
+        "id": 7570,
+        "form": "",
+        "method": "GET",
+        "request_content_type": "application/json",
+        "response_content_type": "application/json",
+        "triggers": {
+          "ticket-created": true,
+          "ticket-updated": true,
+          "ticket-message-created": true,
+          "ticket-self-unsnoozed": false
+        },
+        "url": "https://api.shipup.co/v1/trackers/zendesk_trackers?filter[search]={{ticket.customer.email}}"
+      },
+      "locked_datetime": null,
+      "meta": {
+        "failures": 0
+      },
+      "name": "Shipup",
+      "type": "http",
+      "updated_datetime": "2024-09-02T08:28:07.242631+00:00",
+      "user": {
+        "id": 410016835
+      },
+      "uri": "/api/integrations/114810/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 114530,
+      "created_datetime": "2023-06-19T12:04:11.276578+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "provider": "sendgrid",
+        "outbound_verification_status": {
+          "single_sender": "unverified",
+          "domain": "success"
+        },
+        "address": "hello+care@manucurist.com",
+        "preferred": false,
+        "signature": {
+          "text": "La Team Manucurist",
+          "html": "<div>La Team Manucurist</div>"
+        },
+        "verified": true,
+        "email_forwarding_activated": true
+      },
+      "name": "Hello Manucurist",
+      "type": "email",
+      "updated_datetime": "2024-04-17T14:06:49.817215+00:00",
+      "user": {
+        "id": 265520487
+      },
+      "uri": "/api/integrations/114530/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 114488,
+      "created_datetime": "2023-06-15T08:59:15.024932+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "phone_number_id": 687,
+        "routing": {
+          "phone_number": "+33781291715",
+          "sub_account_sid": "109507478836934",
+          "waba_phone_number_id": "114221925033634"
+        },
+        "emoji": null
+      },
+      "name": "WhatsApp +33781291715",
+      "type": "whatsapp",
+      "updated_datetime": "2023-07-24T15:37:19.901714+00:00",
+      "user": {
+        "id": 410016835
+      },
+      "uri": "/api/integrations/114488/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 113627,
+      "created_datetime": "2023-04-03T17:49:03.764547+00:00",
+      "deactivated_datetime": "2023-07-26T12:09:19+00:00",
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {},
+      "name": "Trustpilot-Gorgias",
+      "type": "http",
+      "updated_datetime": "2023-07-26T12:09:19.518762+00:00",
+      "user": {
+        "id": 27708463
+      },
+      "uri": "/api/integrations/113627/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 113220,
+      "created_datetime": "2023-03-15T17:47:46.367024+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "provider": "sendgrid",
+        "outbound_verification_status": {
+          "single_sender": "unverified",
+          "domain": "success"
+        },
+        "address": "supplychain@manucurist.com",
+        "preferred": false,
+        "verified": false,
+        "email_forwarding_activated": false,
+        "import_activated": false,
+        "use_gmail_categories": false,
+        "enable_gmail_sending": true,
+        "sync": {
+          "datetime": "2024-09-02 08:36:50.681356",
+          "expiration": "1725610496719",
+          "history_id": "1045650"
+        },
+        "oauth": {
+          "status": "success"
+        },
+        "use_new_creds_version": true,
+        "enable_gmail_threading": true
+      },
+      "name": "Supply Chain",
+      "type": "gmail",
+      "updated_datetime": "2024-09-02T08:36:54.253552+00:00",
+      "user": {
+        "id": 119980733
+      },
+      "uri": "/api/integrations/113220/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 111662,
+      "created_datetime": "2023-01-11T16:23:22.329877+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "emoji": null,
+        "function": "standard",
+        "preferences": {
+          "record_inbound_calls": false,
+          "voicemail_outside_business_hours": true,
+          "record_outbound_calls": false,
+          "ringing_behaviour": "round_robin"
+        },
+        "voicemail": {
+          "voice_message_type": "text_to_speech",
+          "text_to_speech_content": "Hello, unfortunately we aren't able to take your call right now. Please call us back later. Thank you!",
+          "voice_recording_file_path": null,
+          "allow_to_leave_voicemail": true
+        },
+        "greeting_message": {
+          "voice_message_type": "none",
+          "text_to_speech_content": null,
+          "voice_recording_file_path": null
+        },
+        "phone_number_id": 327,
+        "phone_team_id": 3795
+      },
+      "name": "Phone - +33 1 86 47 93 51 - Ported - Voice",
+      "type": "phone",
+      "updated_datetime": "2023-12-07T10:07:14.405715+00:00",
+      "user": {
+        "id": 380653399
+      },
+      "uri": "/api/integrations/111662/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 111185,
+      "created_datetime": "2022-12-26T09:14:54.436706+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "emoji": null,
+        "function": "standard",
+        "preferences": {
+          "record_inbound_calls": true,
+          "voicemail_outside_business_hours": true,
+          "record_outbound_calls": false,
+          "ringing_behaviour": "broadcast"
+        },
+        "voicemail": {
+          "voice_message_type": "text_to_speech",
+          "text_to_speech_content": "Hello, unfortunately we aren't able to take your call right now. Please call us back later. Thank you!",
+          "voice_recording_file_path": null,
+          "allow_to_leave_voicemail": true
+        },
+        "greeting_message": {
+          "voice_message_type": "text_to_speech",
+          "text_to_speech_content": "Welcome to Manucurist",
+          "voice_recording_file_path": null
+        },
+        "phone_number_id": 337,
+        "phone_team_id": 3783
+      },
+      "name": "Phone - +33 1 86 47 93 50 - Ported - Voice",
+      "type": "phone",
+      "updated_datetime": "2023-12-07T10:07:12.684453+00:00",
+      "user": {
+        "id": 380653399
+      },
+      "uri": "/api/integrations/111185/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 107746,
+      "created_datetime": "2022-06-16T08:19:23.736204+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "provider": "sendgrid",
+        "outbound_verification_status": {
+          "single_sender": "unverified",
+          "domain": "success"
+        },
+        "address": "teamlogistique@manucurist.com",
+        "preferred": false,
+        "signature": {
+          "text": "",
+          "html": "<div><br></div>"
+        },
+        "verified": false,
+        "email_forwarding_activated": false,
+        "import_activated": true,
+        "use_gmail_categories": false,
+        "enable_gmail_sending": true,
+        "importation": {
+          "count": 5,
+          "failed": [],
+          "status": "completed",
+          "import_locked_datetime": null,
+          "last_imported_thread_creation_date": "2022/06/17"
+        },
+        "sync": {
+          "datetime": "2024-09-02 08:23:45.823810",
+          "expiration": "1725695974477",
+          "history_id": "2680535"
+        },
+        "oauth": {
+          "status": "success"
+        },
+        "use_new_creds_version": true,
+        "enable_gmail_threading": true
+      },
+      "name": "Team Logistique",
+      "type": "gmail",
+      "updated_datetime": "2024-09-02T08:23:46.105376+00:00",
+      "user": {
+        "id": 119980733
+      },
+      "uri": "/api/integrations/107746/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 84776,
+      "created_datetime": "2021-02-18T09:14:05.025397+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "oauth": {
+          "status": "success",
+          "scope": [
+            "read_all_orders",
+            "read_orders",
+            "write_orders",
+            "write_order_edits",
+            "read_order_edits",
+            "read_customers",
+            "write_customers",
+            "read_themes",
+            "write_themes",
+            "read_products",
+            "read_draft_orders",
+            "write_draft_orders",
+            "read_discounts",
+            "write_discounts",
+            "read_script_tags",
+            "write_script_tags",
+            "read_content",
+            "write_content",
+            "read_fulfillments"
+          ]
+        },
+        "shop_name": "manucurist-us",
+        "shop_display_name": "Manucurist US",
+        "shop_domain": "us.manucurist.com",
+        "shop_id": 32059883565,
+        "shop_phone": "212-260-5924",
+        "shop_plan": "shopify_plus",
+        "uses_multi_currency": false,
+        "import_state": {
+          "customers": {
+            "is_over": true,
+            "oldest_created_at": "2020-09-22T03:35:28-04:00"
+          },
+          "products": {
+            "is_over": true,
+            "oldest_created_at": "2020-07-29T12:27:07-04:00"
+          }
+        },
+        "need_scope_update": false,
+        "sync_customer_notes": true,
+        "webhooks": [
+          {
+            "topic": "carts/create",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/carts/create/",
+            "webhook_id": 1128705753133
+          },
+          {
+            "topic": "carts/update",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/carts/update/",
+            "webhook_id": 1128705785901
+          },
+          {
+            "topic": "customers/create",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/customers/create/",
+            "webhook_id": 881409622061
+          },
+          {
+            "topic": "customers/delete",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/customers/delete/",
+            "webhook_id": 881409654829
+          },
+          {
+            "topic": "customers/disable",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/customers/disable/",
+            "webhook_id": 881409687597
+          },
+          {
+            "topic": "customers/enable",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/customers/enable/",
+            "webhook_id": 881409720365
+          },
+          {
+            "topic": "customers/update",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/customers/update/",
+            "webhook_id": 881409753133
+          },
+          {
+            "topic": "orders/create",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/orders/create/",
+            "webhook_id": 881409785901
+          },
+          {
+            "topic": "orders/delete",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/orders/delete/",
+            "webhook_id": 881409818669
+          },
+          {
+            "topic": "orders/paid",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/orders/paid/",
+            "webhook_id": 881409851437
+          },
+          {
+            "topic": "orders/partially_fulfilled",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/orders/partially_fulfilled/",
+            "webhook_id": 881409884205
+          },
+          {
+            "topic": "orders/updated",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/orders/updated/",
+            "webhook_id": 881409916973
+          },
+          {
+            "topic": "app/uninstalled",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/app/uninstalled/",
+            "webhook_id": 881409949741
+          },
+          {
+            "topic": "shop/update",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/shop/update/",
+            "webhook_id": 881409982509
+          },
+          {
+            "topic": "products/create",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/products/create/",
+            "webhook_id": 881410015277
+          },
+          {
+            "topic": "products/update",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/products/update/",
+            "webhook_id": 881410048045
+          },
+          {
+            "topic": "products/delete",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/products/delete/",
+            "webhook_id": 881410080813
+          },
+          {
+            "topic": "draft_orders/create",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/draft_orders/create/",
+            "webhook_id": 1179635744813
+          },
+          {
+            "topic": "draft_orders/update",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/draft_orders/update/",
+            "webhook_id": 1179635777581
+          },
+          {
+            "topic": "draft_orders/delete",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/draft_orders/delete/",
+            "webhook_id": 1179635810349
+          }
+        ],
+        "currency": "USD"
+      },
+      "name": "manucurist-us",
+      "type": "shopify",
+      "updated_datetime": "2024-07-16T14:52:47.211257+00:00",
+      "user": {
+        "id": 27708463
+      },
+      "uri": "/api/integrations/84776/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 84775,
+      "created_datetime": "2021-02-18T09:13:34.391709+00:00",
+      "deactivated_datetime": null,
+      "decoration": {
+        "main_color": "#004E42",
+        "conversation_color": "#004E42",
+        "introduction_text": "How can we help ?",
+        "offline_introduction_text": "We'll be back soon !",
+        "avatar_type": "team-members",
+        "avatar_team_picture_url": null,
+        "position": {
+          "alignment": "bottom-right",
+          "offsetX": 0,
+          "offsetY": 80
+        },
+        "launcher": {
+          "type": "icon"
+        },
+        "avatar": {
+          "image_type": "company-logo",
+          "name_type": "chat-title",
+          "company_logo_url": "https://config.gorgias.io/production/r1WE86rKZA2J4Mvg/smooch_inside/avatar_team_pictures/B9Zby7Zky5xeNk3R/3be63c50-f94f-40ef-9f9d-076c1fbe9687.png"
+        },
+        "main_font_family": "Inter",
+        "background_color_style": "gradient",
+        "display_bot_label": true,
+        "use_main_color_outside_business_hours": false
+      },
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "app_id": "3818",
+        "shopify_integration_ids": [
+          84776
+        ],
+        "preferences": {
+          "email_capture_enabled": true,
+          "email_capture_enforcement": "optional",
+          "auto_responder": {
+            "enabled": true,
+            "reply": "reply-dynamic"
+          },
+          "linked_email_integration": 18144,
+          "hide_on_mobile": false,
+          "hide_outside_business_hours": true,
+          "privacy_policy_disclaimer_enabled": false,
+          "display_campaigns_hidden_chat": false,
+          "offline_mode_enabled_datetime": null,
+          "live_chat_availability": "always-live-during-business-hours",
+          "control_ticket_volume": false,
+          "send_chat_transcript": true
+        },
+        "language": "en-US",
+        "languages": [
+          {
+            "language": "en-US",
+            "primary": true
+          }
+        ],
+        "quick_replies": {
+          "enabled": false,
+          "replies": [
+            "Green Flash Tips💅",
+            "Delivery & Returns🔄",
+            "Where's my order ?📦"
+          ]
+        },
+        "shop_name": "manucurist-us",
+        "shop_type": "shopify",
+        "shop_integration_id": 84776,
+        "wizard": {
+          "status": "published",
+          "step": "installation"
+        },
+        "installation": {
+          "visibility": {
+            "method": "show-on-every-page"
+          }
+        },
+        "one_click_installation_datetime": "2023-10-03T10:23:20.839079",
+        "one_click_uninstallation_datetime": "2023-10-03T10:10:04.471302",
+        "one_click_installation_method": "script_tag"
+      },
+      "name": "The TeaM 💅",
+      "type": "gorgias_chat",
+      "updated_datetime": "2024-08-26T07:07:39.468653+00:00",
+      "user": {
+        "id": 27708463
+      },
+      "uri": "/api/integrations/84775/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 83853,
+      "created_datetime": "2021-01-26T12:58:15.628241+00:00",
+      "deactivated_datetime": null,
+      "decoration": {
+        "main_color": "#004E41",
+        "conversation_color": "#FCF0F2",
+        "introduction_text": "Besoin d'aide ? How can we help?",
+        "offline_introduction_text": "De retour bientôt ! — Back soon!",
+        "avatar_type": "team-picture",
+        "avatar_team_picture_url": "https://config.gorgias.io/production/r1WE86rKZA2J4Mvg/smooch_inside/avatar_team_pictures/ZPB9rx1A8exWVa3O/bfe7973a-80ad-4b17-b64c-d1f62e0e341a.jpg",
+        "position": {
+          "alignment": "bottom-left",
+          "offsetX": 0,
+          "offsetY": 45
+        },
+        "launcher": {
+          "type": "icon"
+        },
+        "avatar": {
+          "image_type": "company-logo",
+          "name_type": "chat-title",
+          "company_logo_url": "https://config.gorgias.io/production/r1WE86rKZA2J4Mvg/smooch_inside/avatar_team_pictures/ZPB9rx1A8exWVa3O/174d04b5-cb22-405d-bfc9-31192aa7cf99.jpg"
+        },
+        "main_font_family": "Inter",
+        "background_color_style": "gradient"
+      },
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "app_id": "2988",
+        "shopify_integration_ids": [],
+        "preferences": {
+          "email_capture_enabled": true,
+          "email_capture_enforcement": "optional",
+          "auto_responder": {
+            "enabled": true,
+            "reply": "reply-dynamic"
+          },
+          "linked_email_integration": 18144,
+          "hide_on_mobile": false,
+          "hide_outside_business_hours": true,
+          "privacy_policy_disclaimer_enabled": false,
+          "display_campaigns_hidden_chat": false,
+          "offline_mode_enabled_datetime": null,
+          "live_chat_availability": "always-live-during-business-hours",
+          "control_ticket_volume": false,
+          "send_chat_transcript": true
+        },
+        "language": "fr-FR",
+        "languages": [
+          {
+            "language": "en-US"
+          },
+          {
+            "language": "fr-FR",
+            "primary": true
+          }
+        ],
+        "quick_replies": {
+          "enabled": false,
+          "replies": [
+            "Tips Green Flash💅",
+            "Où est mon colis📦",
+            "Livraison & Retour🔄"
+          ]
+        },
+        "shop_name": "manucurist-fr",
+        "shop_type": "shopify",
+        "shop_integration_id": 18140,
+        "wizard": {
+          "status": "published",
+          "step": "installation"
+        },
+        "installation": {
+          "visibility": {
+            "method": "show-on-every-page"
+          }
+        },
+        "one_click_installation_datetime": "2023-08-25T16:09:39.123504",
+        "one_click_uninstallation_datetime": "2023-09-26T11:37:28.452542",
+        "one_click_installation_method": "script_tag"
+      },
+      "name": "La teaM 💅",
+      "type": "gorgias_chat",
+      "updated_datetime": "2024-08-26T07:07:24.789273+00:00",
+      "user": {
+        "id": 27708463
+      },
+      "uri": "/api/integrations/83853/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 83852,
+      "created_datetime": "2021-01-26T12:58:03.191186+00:00",
+      "deactivated_datetime": null,
+      "decoration": {
+        "main_color": "#004E42",
+        "conversation_color": "#004E42",
+        "introduction_text": "How can we help?",
+        "offline_introduction_text": "We'll be back soon",
+        "avatar_type": "team-picture",
+        "avatar_team_picture_url": "https://config.gorgias.io/production/r1WE86rKZA2J4Mvg/smooch_inside/avatar_team_pictures/GyBLV6kOQj6NbQkK/6caea246-0b0f-4aa7-ace0-38fbcf93f5b6.png",
+        "position": {
+          "alignment": "bottom-left",
+          "offsetX": 0,
+          "offsetY": 45
+        },
+        "launcher": {
+          "type": "icon"
+        },
+        "avatar": {
+          "image_type": "company-logo",
+          "name_type": "chat-title",
+          "company_logo_url": "https://config.gorgias.io/production/r1WE86rKZA2J4Mvg/smooch_inside/avatar_team_pictures/GyBLV6kOQj6NbQkK/6caea246-0b0f-4aa7-ace0-38fbcf93f5b6.png"
+        },
+        "main_font_family": "Inter",
+        "background_color_style": "gradient"
+      },
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "app_id": "2987",
+        "shopify_integration_ids": [],
+        "preferences": {
+          "email_capture_enabled": true,
+          "email_capture_enforcement": "optional",
+          "auto_responder": {
+            "enabled": true,
+            "reply": "reply-dynamic"
+          },
+          "linked_email_integration": 18144,
+          "hide_on_mobile": false,
+          "hide_outside_business_hours": true,
+          "privacy_policy_disclaimer_enabled": false,
+          "display_campaigns_hidden_chat": false,
+          "offline_mode_enabled_datetime": null,
+          "live_chat_availability": "always-live-during-business-hours",
+          "control_ticket_volume": false,
+          "send_chat_transcript": true
+        },
+        "language": "en-GB",
+        "languages": [
+          {
+            "language": "en-US"
+          },
+          {
+            "language": "en-GB",
+            "primary": true
+          }
+        ],
+        "quick_replies": {
+          "enabled": false,
+          "replies": [
+            "💅Green Flash Tips",
+            "📦Where's my parcel",
+            "🔄Delivery & Returns"
+          ]
+        },
+        "shop_name": "manucurist-uk",
+        "shop_type": "shopify",
+        "shop_integration_id": 44657,
+        "wizard": {
+          "status": "published",
+          "step": "installation"
+        },
+        "installation": {
+          "visibility": {
+            "method": "show-on-every-page"
+          }
+        },
+        "one_click_installation_datetime": "2023-08-25T16:09:49.570991",
+        "one_click_uninstallation_datetime": "2023-09-26T11:36:02.530307",
+        "one_click_installation_method": "script_tag"
+      },
+      "name": "The TeaM 💅",
+      "type": "gorgias_chat",
+      "updated_datetime": "2024-08-26T07:07:52.073603+00:00",
+      "user": {
+        "id": 27708463
+      },
+      "uri": "/api/integrations/83852/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 82400,
+      "created_datetime": "2020-12-22T16:00:39.688290+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": "Swell",
+      "http": {
+        "id": 1908,
+        "form": "",
+        "method": "GET",
+        "request_content_type": "application/json",
+        "response_content_type": "application/json",
+        "triggers": {
+          "ticket-created": true,
+          "ticket-updated": true,
+          "ticket-message-created": false
+        },
+        "url": "https://app.swellrewards.com/api/v2/customers?customer_email={{ticket.customer.email}}&merchant_id=63275&api_key=M0FrDTpukWjHw79a4LLQzwtt"
+      },
+      "locked_datetime": null,
+      "meta": {
+        "failures": 0,
+        "notifications": {}
+      },
+      "name": "Get customer points",
+      "type": "http",
+      "updated_datetime": "2024-09-02T00:49:29.682953+00:00",
+      "user": {
+        "id": 27708463
+      },
+      "uri": "/api/integrations/82400/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 44657,
+      "created_datetime": "2020-06-26T13:31:35.716254+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "oauth": {
+          "status": "success",
+          "scope": [
+            "read_all_orders",
+            "read_orders",
+            "write_orders",
+            "write_order_edits",
+            "read_order_edits",
+            "read_customers",
+            "write_customers",
+            "read_themes",
+            "write_themes",
+            "read_products",
+            "read_draft_orders",
+            "write_draft_orders",
+            "read_discounts",
+            "write_discounts",
+            "read_script_tags",
+            "write_script_tags",
+            "read_content",
+            "write_content",
+            "read_fulfillments"
+          ]
+        },
+        "shop_name": "manucurist-uk",
+        "shop_display_name": "Manucurist UK",
+        "shop_domain": "uk.manucurist.com",
+        "shop_id": 31549718666,
+        "shop_phone": "13225443",
+        "shop_plan": "shopify_plus",
+        "uses_multi_currency": false,
+        "import_state": {
+          "customers": {
+            "is_over": true,
+            "oldest_created_at": "2020-05-28T16:11:02+01:00"
+          },
+          "products": {
+            "is_over": true,
+            "oldest_created_at": "2020-05-27T16:08:29+01:00"
+          }
+        },
+        "need_scope_update": false,
+        "sync_customer_notes": true,
+        "webhooks": [
+          {
+            "topic": "carts/create",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/carts/create/",
+            "webhook_id": 1236133707914
+          },
+          {
+            "topic": "carts/update",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/carts/update/",
+            "webhook_id": 1236133740682
+          },
+          {
+            "topic": "customers/create",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/customers/create/",
+            "webhook_id": 840077410442
+          },
+          {
+            "topic": "customers/delete",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/customers/delete/",
+            "webhook_id": 840077443210
+          },
+          {
+            "topic": "customers/disable",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/customers/disable/",
+            "webhook_id": 840077475978
+          },
+          {
+            "topic": "customers/enable",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/customers/enable/",
+            "webhook_id": 840077508746
+          },
+          {
+            "topic": "customers/update",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/customers/update/",
+            "webhook_id": 840077541514
+          },
+          {
+            "topic": "orders/create",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/orders/create/",
+            "webhook_id": 840077574282
+          },
+          {
+            "topic": "orders/delete",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/orders/delete/",
+            "webhook_id": 840077607050
+          },
+          {
+            "topic": "orders/paid",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/orders/paid/",
+            "webhook_id": 840077639818
+          },
+          {
+            "topic": "orders/partially_fulfilled",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/orders/partially_fulfilled/",
+            "webhook_id": 840077672586
+          },
+          {
+            "topic": "orders/updated",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/orders/updated/",
+            "webhook_id": 840077705354
+          },
+          {
+            "topic": "app/uninstalled",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/app/uninstalled/",
+            "webhook_id": 840077738122
+          },
+          {
+            "topic": "shop/update",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/shop/update/",
+            "webhook_id": 840077770890
+          },
+          {
+            "topic": "products/create",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/products/create/",
+            "webhook_id": 840077803658
+          },
+          {
+            "topic": "products/update",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/products/update/",
+            "webhook_id": 840077836426
+          },
+          {
+            "topic": "products/delete",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/products/delete/",
+            "webhook_id": 840077869194
+          },
+          {
+            "topic": "draft_orders/create",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/draft_orders/create/",
+            "webhook_id": 1289092530314
+          },
+          {
+            "topic": "draft_orders/update",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/draft_orders/update/",
+            "webhook_id": 1289092563082
+          },
+          {
+            "topic": "draft_orders/delete",
+            "address": "https://webhooks.gorgias.io/api/incoming/shopify/draft_orders/delete/",
+            "webhook_id": 1289092595850
+          }
+        ],
+        "currency": "GBP"
+      },
+      "name": "manucurist-uk",
+      "type": "shopify",
+      "updated_datetime": "2024-07-16T14:45:48.994364+00:00",
+      "user": {
+        "id": 27708463
+      },
+      "uri": "/api/integrations/44657/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 18144,
+      "created_datetime": "2020-04-17T11:12:02.715238+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "provider": "sendgrid",
+        "outbound_verification_status": {
+          "single_sender": "unverified",
+          "domain": "success"
+        },
+        "address": "hello@manucurist.com",
+        "preferred": true,
+        "signature": {
+          "text": "",
+          "html": "<div><br></div>"
+        },
+        "verified": false,
+        "email_forwarding_activated": false,
+        "import_activated": true,
+        "use_gmail_categories": false,
+        "enable_gmail_sending": true,
+        "importation": {
+          "count": 3681,
+          "failed": [],
+          "status": "completed",
+          "import_locked_datetime": null,
+          "last_imported_thread_creation_date": "2019/11/04"
+        },
+        "sync": {
+          "datetime": "2024-09-02 08:38:38.807593",
+          "expiration": "1725808958023",
+          "history_id": "51573218"
+        },
+        "oauth": {
+          "status": "success"
+        },
+        "use_new_creds_version": true,
+        "enable_gmail_threading": false
+      },
+      "name": "Hello Manucurist",
+      "type": "gmail",
+      "updated_datetime": "2024-09-02T08:38:39.088531+00:00",
+      "user": {
+        "id": 27708463
+      },
+      "uri": "/api/integrations/18144/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 18143,
+      "created_datetime": "2020-04-17T11:08:36.426670+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": "Sync tickets and users between Facebook and Gorgias",
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "oauth": {
+          "status": "success",
+          "scope": "pages_show_list,ads_management,ads_read,business_management,pages_messaging,instagram_basic,instagram_manage_comments,instagram_manage_messages,pages_read_engagement,pages_manage_metadata,pages_read_user_content,pages_manage_ads,pages_manage_posts,pages_manage_engagement,public_profile"
+        },
+        "roles": "ADVERTISE,ANALYZE,CREATE_CONTENT,MESSAGING,MODERATE,MANAGE",
+        "can_be_onboarded": true,
+        "preferences": {
+          "auto_responder": {
+            "enabled": false,
+            "reply": "reply-shortly"
+          }
+        },
+        "history_sync": {
+          "posts": {
+            "is_synchronized": false,
+            "oldest_time_synced": "2020-04-17T11:08:36.426670"
+          },
+          "oldest_syncable": "2020-03-18T11:08:36.426670",
+          "is_synchronized": true
+        },
+        "picture": {
+          "data": {
+            "height": 50,
+            "is_silhouette": false,
+            "url": "https://scontent-atl3-2.xx.fbcdn.net/v/t1.0-1/cp0/p50x50/56835577_2355619037863940_3695261734014025728_n.png?_nc_cat=101&ccb=2&_nc_sid=dbb9e7&_nc_ohc=85k7gUb2VTQAX_ud1jq&_nc_ht=scontent-atl3-2.xx&_nc_tp=30&oh=ae4ab5f133b4f7b3d6be4f1333d90020&oe=602D0B5B",
+            "width": 50
+          }
+        },
+        "page_id": "808119945947198",
+        "name": "Manucurist Professionnel",
+        "language": "en-US",
+        "about": "Manucurist Professionnel est la marque de référence pour les professionnels de la beauté des mains.\n\nExpert couleurs et soins pour les ongles depuis 1996.",
+        "category": "Beauté, cosmétique et soins",
+        "settings": {
+          "messenger_enabled": true,
+          "posts_enabled": true,
+          "import_history_enabled": false,
+          "instagram_comments_enabled": false,
+          "instagram_ads_enabled": false
+        }
+      },
+      "name": "Manucurist Professionnel",
+      "type": "facebook",
+      "updated_datetime": "2024-06-03T10:00:58.694338+00:00",
+      "user": {
+        "id": 493620550
+      },
+      "uri": "/api/integrations/18143/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 18142,
+      "created_datetime": "2020-04-17T11:08:36.288153+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": "Sync tickets and users between Facebook and Gorgias",
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "oauth": {
+          "status": "success",
+          "scope": "pages_show_list,ads_management,ads_read,business_management,pages_messaging,instagram_basic,instagram_manage_comments,instagram_manage_messages,pages_read_engagement,pages_manage_metadata,pages_read_user_content,pages_manage_ads,pages_manage_posts,pages_manage_engagement,public_profile"
+        },
+        "roles": "ADVERTISE,ANALYZE,CREATE_CONTENT,MESSAGING,MODERATE,MANAGE",
+        "can_be_onboarded": true,
+        "preferences": {
+          "auto_responder": {
+            "enabled": false,
+            "reply": "reply-shortly"
+          }
+        },
+        "history_sync": {
+          "posts": {
+            "is_synchronized": false,
+            "oldest_time_synced": "2020-04-17T11:08:36.288153"
+          },
+          "oldest_syncable": "2020-03-18T11:08:36.288153",
+          "is_synchronized": true
+        },
+        "instagram": {
+          "id": "17841401525095216",
+          "name": "Manucurist",
+          "username": "manucurist",
+          "followers_count": 462029,
+          "instagram_direct_message_allowed": true
+        },
+        "picture": {
+          "data": {
+            "height": 50,
+            "is_silhouette": false,
+            "url": "https://scontent-atl3-2.xx.fbcdn.net/v/t1.0-1/cp0/p50x50/120202554_3476824722383545_1696492003230555012_o.png?_nc_cat=109&ccb=2&_nc_sid=dbb9e7&_nc_ohc=LewJQAAYwVEAX97y9Br&_nc_ht=scontent-atl3-2.xx&_nc_tp=30&oh=143bad9be8343822c44948436886c3f1&oe=602B5F21",
+            "width": 50
+          }
+        },
+        "page_id": "146294258769958",
+        "name": "Manucurist",
+        "language": "fr",
+        "about": "Expert couleurs et soins pour les ongles depuis 1996.",
+        "category": "Santé/beauté",
+      },
+      "name": "Manucurist",
+      "type": "facebook",
+      "updated_datetime": "2024-06-05T10:48:30.025135+00:00",
+      "user": {
+        "id": 493620550
+      },
+      "uri": "/api/integrations/18142/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 18140,
+      "created_datetime": "2020-04-17T11:05:49.919615+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "name": "manucurist-fr",
+      "type": "shopify",
+      "updated_datetime": "2024-05-16T19:56:32.675260+00:00",
+      "user": {
+        "id": 27708463
+      },
+      "uri": "/api/integrations/18140/",
+      "application_id": null,
+      "managed": false
+    },
+    {
+      "id": 17846,
+      "created_datetime": "2020-04-16T16:03:37.727725+00:00",
+      "deactivated_datetime": null,
+      "decoration": null,
+      "description": null,
+      "http": null,
+      "locked_datetime": null,
+      "meta": {
+        "provider": "sendgrid",
+        "outbound_verification_status": {
+          "single_sender": "unverified",
+          "domain": "success"
+        },
+        "address": "rpjxmolklxy5z8wq@email.gorgias.com",
+        "preferred": false,
+        "verified": true,
+        "email_forwarding_activated": false
+      },
+      "name": "Manucurist Support",
+      "type": "email",
+      "updated_datetime": "2023-12-21T08:35:41.564784+00:00",
+      "user": {
+        "id": 27708478
+      },
+      "uri": "/api/integrations/17846/",
+      "application_id": null,
+      "managed": false
+    }
+  ]
+}

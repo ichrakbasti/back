@@ -120,7 +120,6 @@ class TicketsController extends AbstractController
     {
         $total = $ticketsRepository->getTotalTicketsByType('http');
 
-        dd($total);
         return new JsonResponse(['total' => $total]);
     }
 
@@ -136,10 +135,56 @@ class TicketsController extends AbstractController
     #[Route('/api/dashboard/total-tickets-per-month', name: 'dashboard_total_tickets_per_month')]
     public function getTotalTicketsPerMonth(TicketsRepository $ticketsRepository): JsonResponse
     {
-        $data = $ticketsRepository->getTotalTicketsPerMonth();
 
-        dd($data);
-        return new JsonResponse($data);
+        $ticket_data = $ticketsRepository->getTotalTicketsPerMonthAndType();
+
+        $data_by_product = [];
+
+        $date_categories = [];
+
+        foreach ($ticket_data as $row) {
+            // 5. Extract day, month, year, ticketType, and total
+            $day = $row['day'];
+            $month = $row['month'];
+            $year = $row['year'];
+            $ticket_type = $row['ticketType'];
+            $total = $row['total'];
+
+            $date_str = $year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT) . '-' . str_pad($day, 2, '0', STR_PAD_LEFT);
+            if (!in_array($date_str, $date_categories)) {
+                $date_categories[] = $date_str;
+            }
+
+            // 7. If ticketType is not in data_by_product, initialize an empty array for it
+            if (!isset($data_by_product[$ticket_type])) {
+                $data_by_product[$ticket_type] = [];
+            }
+
+            $data_by_product[$ticket_type][] = $total;
+        }
+
+        sort($date_categories);
+
+        $series_data = [];
+
+        foreach ($data_by_product as $ticket_type => $totals) {
+            $series_item = [
+                'name' => $ticket_type,
+                'data' => $totals
+            ];
+
+            $series_data[] = $series_item;
+        }
+
+        $chart_data = [
+            'series' => $series_data,
+            'xaxis' => [
+                'type' => 'datetime',
+                'categories' => $date_categories
+            ]
+        ];
+
+        return new JsonResponse($chart_data);
     }
      #[Route('/api/dashboard/statistic', name: 'dashboard_statistic')]
     public function getstats(TicketsRepository $ticketsRepository, GorgiasApiService $gorgiasApiService): JsonResponse

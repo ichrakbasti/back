@@ -51,9 +51,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Tickets::class, mappedBy: 'userId')]
     private Collection $tickets;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?Teams $teams = null;
-
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
@@ -196,30 +193,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             $this->tickets->add($ticket);
             $ticket->setUserId($this);
         }
-
-        return $this;
-    }
-
-    public function removeTicket(Tickets $ticket): static
-    {
-        if ($this->tickets->removeElement($ticket)) {
-            // set the owning side to null (unless already changed)
-            if ($ticket->getUserId() === $this) {
-                $ticket->setUserId(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getTeams(): ?Teams
-    {
-        return $this->teams;
-    }
-
-    public function setTeams(?Teams $teams): static
-    {
-        $this->teams = $teams;
 
         return $this;
     }

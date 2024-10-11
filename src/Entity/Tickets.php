@@ -60,6 +60,9 @@ class Tickets
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $countryCode = null;
 
+    #[ORM\ManyToOne(targetEntity: Markets::class, inversedBy: 'tickets')]
+    private ?Markets $market = null;
+
     #[ORM\Column]
     private ?\DateTimeImmutable $createdDatetime = null;
 
@@ -74,6 +77,9 @@ class Tickets
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $contactReason = null;
+
+    #[ORM\ManyToOne(inversedBy: 'tickets')]
+    private ?Teams $team = null;
 
     public function __construct()
     {
@@ -330,5 +336,28 @@ class Tickets
 
         return $this;
     }
+
+    public function getMarket(): ?Markets
+    {
+        return $this->market;
+    }
+
+    public function setMarket(?Markets $market): void
+    {
+        $this->market = $market;
+    }
+
+    public function getTeam(): ?Teams
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Teams $team): static
+    {
+        $this->team = $team;
+
+        return $this;
+    }
+
 
 }

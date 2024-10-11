@@ -18,15 +18,19 @@ class Teams
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\Column]
+    private ?int $gorgiasTeamId = null;
+
     /**
-     * @var Collection<int, Users>
+     * @var Collection<int, Tickets>
      */
-    #[ORM\OneToMany(targetEntity: Users::class, mappedBy: 'teams')]
-    private Collection $users;
+    #[ORM\OneToMany(targetEntity: Tickets::class, mappedBy: 'team')]
+    private Collection $tickets;
+
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->tickets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -47,32 +51,43 @@ class Teams
     }
 
     /**
-     * @return Collection<int, Users>
+     * @return Collection<int, Tickets>
      */
-    public function getUsers(): Collection
+    public function getTickets(): Collection
     {
-        return $this->users;
+        return $this->tickets;
     }
 
-    public function addUser(Users $user): static
+    public function addTicket(Tickets $ticket): static
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->setTeams($this);
+        if (!$this->tickets->contains($ticket)) {
+            $this->tickets->add($ticket);
+            $ticket->setTeam($this);
         }
 
         return $this;
     }
 
-    public function removeUser(Users $user): static
+    public function removeTicket(Tickets $ticket): static
     {
-        if ($this->users->removeElement($user)) {
+        if ($this->tickets->removeElement($ticket)) {
             // set the owning side to null (unless already changed)
-            if ($user->getTeams() === $this) {
-                $user->setTeams(null);
+            if ($ticket->getTeam() === $this) {
+                $ticket->setTeam(null);
             }
         }
 
         return $this;
     }
+
+    public function getGorgiasTeamId(): ?int
+    {
+        return $this->gorgiasTeamId;
+    }
+
+    public function setGorgiasTeamId(?int $gorgiasTeamId): void
+    {
+        $this->gorgiasTeamId = $gorgiasTeamId;
+    }
+
 }

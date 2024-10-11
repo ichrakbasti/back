@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Tickets;
+use App\Repository\TeamsRepository;
 use App\Service\GorgiasApiService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -23,13 +24,15 @@ class UpdateTicketsCommand extends Command
 
     private $entityManager;
     private $gorgiasService;
+    private $teamsRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, GorgiasApiService $gorgiasService)
+    public function __construct(EntityManagerInterface $entityManager, GorgiasApiService $gorgiasService, TeamsRepository $teamsRepository)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
         $this->gorgiasService = $gorgiasService;
+        $this->teamsRepository = $teamsRepository;
     }
 
     protected function configure(): void
@@ -43,36 +46,52 @@ class UpdateTicketsCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $tickets = $this->entityManager->getRepository(Tickets::class)->createQueryBuilder('t')
-            ->where('t.createdDatetime >= :date')
-            ->andWhere('t.contactReason IS NULL OR t.countryCode IS NULL')
-            ->setParameter('date', new \DateTime('-15 days'))
-            ->setMaxResults(500)
-            ->getQuery()
-            ->getResult();
+        $batchSize = 100; // Taille du lot de tickets à traiter
+        $offset = 0; // Position de départ pour la pagination
 
-        foreach ($tickets as $ticket) {
-            $ticketId = $ticket->getGorgiasTicketId();
-            $customFields = $this->gorgiasService->getTicketsCustomField($ticketId);
+        do {
 
-            // Vérification de l'existence des custom fields
-            if (isset($customFields['custom_fields']) && is_array($customFields['custom_fields'])) {
-                $fields = $customFields['custom_fields'];
+            // Récupérer un lot de 100 tickets sans `team` pour les traiter
+            $tickets = $this->entityManager->getRepository(Tickets::class)->createQueryBuilder('t')
+                ->andWhere('t.team IS NULL')
+                ->setFirstResult($offset)
+                ->setMaxResults($batchSize)
+                ->getQuery()
+                ->getResult();
 
-                // Vérification et mise à jour des champs spécifiques
-                if (isset($fields["26"]['value']) && !empty($fields["26"]['value'])) {
-                    $ticket->setContactReason($fields[26]['value']);
-                }
+            var_dump($batchSize);
+            foreach ($tickets as $ticket) {
+                $ticketId = $ticket->getGorgiasTicketId();
 
-                if (isset($fields["27"]['value']) && !empty($fields["27"]['value'])) {
-                    $ticket->setCountryCode($fields[27]['value']);
+                try {
+                    $customFields = $this->gorgiasService->getTicketsCustomField($ticketId);
+
+
+                    $team = $this->teamsRepository->findOneBy(["gorgiasTeamId"=>$customFields['assignee_team_id']]);
+                    if ($team) {
+                       $ticket->setTeam($team);
+                    }
+
+                    usleep(200000);  // Pause de 0.2 secondes entre chaque requête
+                    $this->entityManager->persist($ticket);
+
+                } catch (\Exception $e) {
+                    if ($e->getCode() === 429) {
+                        // Temporisation supplémentaire en cas d'erreur de débit
+                        sleep(60);
+                    } else {
+                        throw $e;
+                    }
                 }
             }
 
-            $this->entityManager->persist($ticket);
-        }
+            // Envoi des mises à jour en base de données pour ce lot
+            $this->entityManager->flush();
+            $this->entityManager->clear(); // Nettoyage pour éviter les fuites de mémoire
 
-        $this->entityManager->flush();
+            $offset += $batchSize; // Déplacement vers le lot suivant
+
+        } while (count($tickets) === $batchSize); // Continue jusqu'à ce que le nombre de tickets soit inférieur à la taille du lot
 
         $io->success('Tickets have been successfully updated.');
 

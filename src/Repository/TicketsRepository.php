@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Tickets;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -26,13 +27,15 @@ class TicketsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
-    public function getTotalTicketsPerMonth(): array
+    public function getTotalTicketsPerMonthAndType(): array
     {
         return $this->createQueryBuilder('t')
-            ->select('EXTRACT(MONTH FROM t.createdAt) as month, EXTRACT(YEAR FROM t.createdAt) as year, COUNT(t.id) as total')
-            ->groupBy('year', 'month')
+            ->select("EXTRACT(DAY FROM t.createdAt) as day, EXTRACT(MONTH FROM t.createdAt) as month, EXTRACT(YEAR FROM t.createdAt) as year, tt.type as ticketType, COUNT(t.id) as total")
+            ->join('t.type', 'tt') // Join with TicketTypes entity
+            ->groupBy('year', 'month', 'day', 'tt.type')
             ->orderBy('year', 'ASC')
             ->addOrderBy('month', 'ASC')
+            ->addOrderBy('day', 'ASC') // Add ordering by day
             ->getQuery()
             ->getResult();
     }

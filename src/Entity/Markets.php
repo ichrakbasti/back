@@ -14,22 +14,49 @@ class Markets
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $code = null;
+    private ?string $countryCode = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $countryName = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $market = null;
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCode(): ?string
+    public function getCountryCode(): ?string
     {
-        return $this->code;
+        return $this->countryCode;
     }
 
-    public function setCode(string $code): static
+    public function setCountryCode(?string $countryCode): void
     {
-        $this->code = $code;
-
-        return $this;
+        $this->countryCode = $countryCode;
     }
+
+    public function getCountryName(): ?string
+    {
+        return $this->countryName;
+    }
+
+    public function setCountryName(?string $countryName): void
+    {
+        $this->countryName = $countryName;
+    }
+
+    public function getMarket(): ?string
+    {
+        return $this->market;
+    }
+
+    public function setMarket(?string $market): void
+    {
+        $this->market = $market;
+    }
+
+
 }

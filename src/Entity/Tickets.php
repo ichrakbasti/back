@@ -39,11 +39,7 @@ class Tickets
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    /**
-     * @var Collection<int, Tags>
-     */
-    #[ORM\OneToMany(targetEntity: Tags::class, mappedBy: 'tickets')]
-    private Collection $tag;
+
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $channel = null;
@@ -81,9 +77,15 @@ class Tickets
     #[ORM\ManyToOne(inversedBy: 'tickets')]
     private ?Teams $team = null;
 
+    /**
+     * @var Collection<int, Tags>
+     */
+    #[ORM\ManyToMany(targetEntity: Tags::class, inversedBy: 'tickets')]
+    private Collection $tags;
+
     public function __construct()
     {
-        $this->tag = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -183,36 +185,6 @@ class Tickets
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Tags>
-     */
-    public function getTag(): Collection
-    {
-        return $this->tag;
-    }
-
-    public function addTag(Tags $tag): static
-    {
-        if (!$this->tag->contains($tag)) {
-            $this->tag->add($tag);
-            $tag->setTickets($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTag(Tags $tag): static
-    {
-        if ($this->tag->removeElement($tag)) {
-            // set the owning side to null (unless already changed)
-            if ($tag->getTickets() === $this) {
-                $tag->setTickets(null);
-            }
-        }
 
         return $this;
     }
@@ -355,6 +327,30 @@ class Tickets
     public function setTeam(?Teams $team): static
     {
         $this->team = $team;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tags>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tags $tag): static
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tags $tag): static
+    {
+        $this->tags->removeElement($tag);
 
         return $this;
     }

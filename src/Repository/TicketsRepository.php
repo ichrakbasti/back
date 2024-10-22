@@ -27,6 +27,7 @@ class TicketsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
     public function getTotalTicketsPerMonthAndType(): array
     {
         return $this->createQueryBuilder('t')
@@ -39,41 +40,169 @@ class TicketsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    public function getTotalTicketsPerMarket(): array
+
+    public function getTotalTicketsPerMarketByDay(): array
     {
         return $this->createQueryBuilder('t')
-            ->select('m.code as market, COUNT(t.id) as total')
+            ->select("EXTRACT(DAY FROM t.createdAt) AS day, EXTRACT(MONTH FROM t.createdAt) AS month, EXTRACT(YEAR FROM t.createdAt) AS year, m.market AS market, COUNT(t.id) AS total")
             ->join('t.market', 'm') // Jointure avec l'entité Markets
-            ->groupBy('m.code')
-            ->orderBy('total', 'DESC') // Trier par nombre de tickets décroissant
+            ->groupBy('year, month, day, m.market') // Regroupement par jour, mois, année et marché
+            ->orderBy('year', 'ASC')
+            ->addOrderBy('month', 'ASC')
+            ->addOrderBy('day', 'ASC') // Tri par jour
             ->getQuery()
             ->getResult();
     }
 
+    public function getTotalTicketsReceived(): int
+    {
+        return $this->createQueryBuilder('t')
+            ->select('COUNT(t.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getTotalTicketsProcessed(): int
+    {
+        return $this->createQueryBuilder('t')
+            ->select('COUNT(t.id)')
+            ->leftJoin('t.status', 'status')
+            ->where('status.statusName = :statusName')
+            ->setParameter('statusName', 'closed')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getTicketStatisticsByUserCM(): array
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->select(
+                'u.id AS userId',
+                'u.email AS fullName',
+                'tt.name AS ticketType',
+                'COUNT(t.id) AS ticketCount'
+            )
+            ->join('t.userId', 'u')        // Join with Users entity to get user info
+            ->join('t.type', 'tt')         // Join with TicketTypes entity to get ticket type info
+            ->join('t.team', 'team')        // Join with Teams entity to filter by team name
+            ->where('team.name = :teamName') // Add condition for team name
+            ->setParameter('teamName', 'CM Tunis')
+            ->groupBy('u.id, tt.name')     // Group by user and ticket type
+            ->orderBy('u.id');
+
+        $result = $qb->getQuery()->getResult();
+        // Organize the data by user with total counts for each ticket type
+        $statistics = [];
+        foreach ($result as $row) {
+            $userId = $row['userId'];
+            $fullName = $row['fullName'];
+            $ticketType = $row['ticketType'];
+            $ticketCount = $row['ticketCount'];
+
+            // Initialize user data if not already set
+            if (!isset($statistics[$userId])) {
+                $statistics[$userId] = [
+                    'id' => $userId,
+                    'user_name' => $fullName,
+                    'facebook' => 0,
+                    'instagram' => 0,
+                    'comment_instagram' => 0,
+                    'tiktok' => 0,
+                    'gorgias' => 0,
+                    'yotpo' => 0,
+                    'total_CM' => 0,
+                ];
+            }
+
+            // Map ticket type counts to the correct fields
+            switch ($ticketType) {
+                case 'facebook':
+                    $statistics[$userId]['facebook'] = $ticketCount;
+                    break;
+                case 'instagram':
+                    $statistics[$userId]['instagram'] = $ticketCount;
+                    break;
+                case 'instagram_comment':
+                    $statistics[$userId]['comment_instagram'] = $ticketCount;
+                    break;
+                case 'tiktok':
+                    $statistics[$userId]['tiktok'] = $ticketCount;
+                    break;
+                case 'gorgias':
+                    $statistics[$userId]['gorgias'] = $ticketCount;
+                    break;
+                case 'yotpo':
+                    $statistics[$userId]['yotpo'] = $ticketCount;
+                    break;
+            }
+
+            // Update the total count for CM tickets
+            $statistics[$userId]['total_CM'] += $ticketCount;
+        }
+
+        return array_values($statistics); // Re-index the array for clean output
+    }
+
+    public function getTicketStatisticsByUserCustomerCare(): array
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->select(
+                'u.id AS userId',
+                'u.email AS fullName',
+                'tt.name AS ticketType',
+                'COUNT(t.id) AS ticketCount'
+            )
+            ->join('t.userId', 'u')        // Join with Users entity to get user info
+            ->join('t.type', 'tt')         // Join with TicketTypes entity to get ticket type info
+            ->join('t.team', 'team')       // Join with Teams entity to filter by team name
+            ->where('team.name = :teamName') // Filter by the team name 'Customer Care'
+            ->setParameter('teamName', 'Customer care')
+            ->groupBy('u.id, tt.name')     // Group by user and ticket type
+            ->orderBy('u.id');
+
+        $result = $qb->getQuery()->getResult();
+
+        // Organize the data by user with total counts for each ticket type
+        $statistics = [];
+        foreach ($result as $row) {
+            $userId = $row['userId'];
+            $fullName = $row['fullName'];
+            $ticketType = $row['ticketType'];
+            $ticketCount = $row['ticketCount'];
+
+            // Initialize user data if not already set
+            if (!isset($statistics[$userId])) {
+                $statistics[$userId] = [
+                    'id' => $userId,
+                    'user_name' => $fullName,
+                    'mail' => 0,
+                    'whatsapp' => 0,
+                    'chat' => 0,
+                    'ticketCount' => 0,  // Total for Customer Care tickets
+                    'nbr_survey' => 0, // Initialize survey data
+                    'average_survey_score' => 0.0,
+                ];
+            }
+
+            // Map ticket type counts to the correct fields
+            switch ($ticketType) {
+                case 'mail':
+                    $statistics[$userId]['mail'] = $ticketCount;
+                    break;
+                case 'whatsapp':
+                    $statistics[$userId]['whatsapp'] = $ticketCount;
+                    break;
+                case 'chat':
+                    $statistics[$userId]['chat'] = $ticketCount;
+                    break;
+            }
+
+            // Update the total count for Customer Care tickets
+            $statistics[$userId]['ticketCount'] += $ticketCount;
+        }
+
+        return array_values($statistics); // Re-index the array for clean output
+    }
 
 
-    //    /**
-    //     * @return Tickets[] Returns an array of Tickets objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('t.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Tickets
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }

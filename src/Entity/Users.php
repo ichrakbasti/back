@@ -45,15 +45,21 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private bool $status; // Par défaut actif
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserProductivity::class)]
+    private Collection $productivity;
+
     /**
      * @var Collection<int, Tickets>
      */
     #[ORM\OneToMany(targetEntity: Tickets::class, mappedBy: 'userId')]
     private Collection $tickets;
-
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
+        $this->productivity = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,4 +202,48 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    // Getter pour le statut actif/inactif
+    public function isActive(): bool
+    {
+        return $this->status;
+    }
+
+    // Setter pour le statut actif/inactif
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserProductivity>
+     */
+    public function getProductivity(): Collection
+    {
+        return $this->productivity;
+    }
+
+    public function addProductivity(UserProductivity $productivity): static
+    {
+        if (!$this->productivity->contains($productivity)) {
+            $this->productivity->add($productivity);
+            $productivity->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductivity(UserProductivity $productivity): static
+    {
+        if ($this->productivity->removeElement($productivity)) {
+            // set the owning side to null (unless already changed)
+            if ($productivity->getUser() === $this) {
+                $productivity->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

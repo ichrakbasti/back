@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Tags;
+use DoctrineExtensions\Query\Mysql\Extract;
 use App\Entity\Teams;
 use App\Entity\Tickets;
 use App\Entity\TicketTypes;
@@ -20,10 +21,10 @@ class CronController extends AbstractController
     #[Route('/cron_tickets', name: 'app_cron')]
     public function index(EntityManagerInterface $entityManager, GorgiasApiService $gorgiasApiService, TicketsService $ticketsService): Response
     {
-        $ticketsService->updateTickets();
+//        $ticketsService->updateTickets();
 //        dd();
-        $limit = 100; // Nombre maximum de tickets par requête
-        $totalTickets = 1000; // Nombre total de tickets à récupérer
+        $limit = 30; // Nombre maximum de tickets par requête
+        $totalTickets = 100; // Nombre total de tickets à récupérer
         $tickets = [];
         $cursor = null;
 
@@ -155,16 +156,22 @@ class CronController extends AbstractController
         // Traiter les données ici, par exemple enregistrer dans la base de données
         foreach ($usersData as $userData) {
             $existingUser = $entityManager->getRepository(Users::class)->findOneBy(['gorgiasUserId' => $userData['id']]);
+
             if (!$existingUser) {
                 $user = new Users();
                 $user->setGorgiasUserId($userData['id']);
                 $user->setEmail($userData['email']);
                 $user->setName($userData['name']);
+                $user->setStatus($userData['active']);
                 $user->setPassword($userData['name']);
                 $user->setCreatedAt(new \DateTimeImmutable($userData['created_datetime']));
                 $user->setUpdatedAt(new \DateTimeImmutable($userData['updated_datetime']));
 
                 $entityManager->persist($user);
+            }else{
+//                dump($existingUser);
+                $existingUser->setStatus($userData['active']);
+//                dd($existingUser);
             }
         }
 
@@ -205,6 +212,43 @@ class CronController extends AbstractController
         $entityManager->flush();
 
         return $this->json(['status' => 'Teams synchronized']);
+    }
+
+    #[Route('/cron_tags', name: 'app_cron_tags')]
+    public function tags(EntityManagerInterface $entityManager): Response
+    {
+        $client = new Client();
+        $response = $client->request('GET', 'https://manucurist.gorgias.com/api/tags?order_by=usage&limit=100', [
+            'headers' => [
+                'accept' => 'application/json',
+                'authorization' => 'Basic aWNocmFrLmJhc3RpQG1hbnVjdXJpc3QuY29tOjg0MzE4MDllNmY0MTVhNzAxMzQ1NTY0YjJkNTgyNTYzMzNjOTBmZGQ2MDRkNGZiMGFmNWEwZmE2MzdiMjk5YmE=',
+            ],
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+
+        if (!empty($data['data'])) {
+            foreach ($data['data'] as $tagData) {
+                // Rechercher le tag existant par son nom
+                $existingTag = $entityManager->getRepository(Tags::class)->findOneBy(['name' => $tagData['name']]);
+                if (!$existingTag) {
+                    // Créer un nouveau tag si non existant
+                    $tag = new Tags();
+                    $tag->setName($tagData['name']);
+                    $tag->setUsage($tagData['usage']);
+                    $tag->setDescription($tagData['description'] ?? '');  // Si description est nulle
+                    $tag->setCreatedAt(new \DateTimeImmutable($tagData['created_datetime']));
+                    $tag->setUpdatedAt(new \DateTimeImmutable()); // Mettre à jour à la date actuelle
+                    $entityManager->persist($tag);
+                }else{
+                    $existingTag->setUsage($tagData['usage']);
+                }
+            }
+        }
+
+        $entityManager->flush();
+
+        return $this->json(['status' => 'Tags synchronized']);
     }
 
 }

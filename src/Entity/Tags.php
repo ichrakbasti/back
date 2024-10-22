@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TagsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TagsRepository::class)]
@@ -28,11 +30,16 @@ class Tags
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $deletedAt = null;
+    /**
+     * @var Collection<int, Tickets>
+     */
+    #[ORM\ManyToMany(targetEntity: Tickets::class, mappedBy: 'tags')]
+    private Collection $tickets;
 
-    #[ORM\ManyToOne(inversedBy: 'tag')]
-    private ?Tickets $tickets = null;
+    public function __construct()
+    {
+        $this->tickets = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -99,27 +106,31 @@ class Tags
         return $this;
     }
 
-    public function getDeletedAt(): ?\DateTimeImmutable
-    {
-        return $this->deletedAt;
-    }
-
-    public function setDeletedAt(\DateTimeImmutable $deletedAt): static
-    {
-        $this->deletedAt = $deletedAt;
-
-        return $this;
-    }
-
-    public function getTickets(): ?Tickets
+    /**
+     * @return Collection<int, Tickets>
+     */
+    public function getTickets(): Collection
     {
         return $this->tickets;
     }
 
-    public function setTickets(?Tickets $tickets): static
+    public function addTicket(Tickets $ticket): static
     {
-        $this->tickets = $tickets;
+        if (!$this->tickets->contains($ticket)) {
+            $this->tickets->add($ticket);
+            $ticket->addTag($this);
+        }
 
         return $this;
     }
+
+    public function removeTicket(Tickets $ticket): static
+    {
+        if ($this->tickets->removeElement($ticket)) {
+            $ticket->removeTag($this);
+        }
+
+        return $this;
+    }
+
 }

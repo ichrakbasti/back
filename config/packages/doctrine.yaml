@@ -26,7 +26,10 @@ doctrine:
             auto_mapping: false
         dql:
             numeric_functions:
+                MONTH: DoctrineExtensions\Query\Mysql\Month
+                YEAR: DoctrineExtensions\Query\Mysql\Year
                 EXTRACT: DoctrineExtensions\Query\Mysql\Extract
+                JSON_CONTAINS: DoctrineExtensions\Query\Mysql\JsonContains
 
 when@test:
     doctrine:

@@ -6,6 +6,7 @@ use App\Entity\Tickets;
 use App\Entity\TicketTypes;
 use App\Form\TicketsType;
 use App\Repository\TicketsRepository;
+use App\Repository\UserProductivityRepository;
 use App\Service\GorgiasApiService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -83,54 +84,74 @@ class TicketsController extends AbstractController
         return $this->redirectToRoute('app_tickets_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/api/dashboard/total-chat', name: 'dashboard_total_chat')]
-    public function getTotalChat(TicketsRepository $ticketsRepository): JsonResponse
+    #[Route('/api/dashboard/ticket-total-stats', name: 'dashboard_ticket_stats')]
+    public function getTicketTotalStats(TicketsRepository $ticketsRepository): JsonResponse
     {
-        $total = $ticketsRepository->getTotalTicketsByType('chat');
+        $data = [
+            'total_received' => $ticketsRepository->getTotalTicketsReceived(),
+            'total_processed' => $ticketsRepository->getTotalTicketsProcessed(),
+            'total_email' => $ticketsRepository->getTotalTicketsByType('email'),
+            'total_chat' => $ticketsRepository->getTotalTicketsByType('chat'),
+            'total_whatsapp' => $ticketsRepository->getTotalTicketsByType('whatsapp')
+        ];
 
-        return new JsonResponse(['total' => $total]);
+        return new JsonResponse($data);
     }
 
-    #[Route('/api/dashboard/total-email', name: 'dashboard_total_email')]
-    public function getTotalEmail(TicketsRepository $ticketsRepository): JsonResponse
-    {
-        $total = $ticketsRepository->getTotalTicketsByType('email');
 
-        return new JsonResponse(['total' => $total]);
+    #[Route('/api/dashboard/total-tickets-per-market', name: 'dashboard_total_tickets_per_market')]
+    public function getTotalTicketsPerMarketByDay(TicketsRepository $ticketsRepository): JsonResponse
+    {
+        $ticket_data = $ticketsRepository->getTotalTicketsPerMarketByDay();
+
+        $data_by_market = [];
+        $date_categories = [];
+
+        foreach ($ticket_data as $row) {
+            // Extraire jour, mois, année, marché et total
+            $day = $row['day'];
+            $month = $row['month'];
+            $year = $row['year'];
+            $market = $row['market'];
+            $total = $row['total'];
+
+            $date_str = $year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT) . '-' . str_pad($day, 2, '0', STR_PAD_LEFT);
+            if (!in_array($date_str, $date_categories)) {
+                $date_categories[] = $date_str;
+            }
+
+            // Si le marché n'est pas dans data_by_market, initialiser un tableau vide
+            if (!isset($data_by_market[$market])) {
+                $data_by_market[$market] = [];
+            }
+
+            $data_by_market[$market][] = $total;
+        }
+
+        sort($date_categories);
+
+        $series_data = [];
+
+        foreach ($data_by_market as $market => $totals) {
+            $series_item = [
+                'name' => $market,
+                'data' => $totals
+            ];
+
+            $series_data[] = $series_item;
+        }
+
+        $chart_data = [
+            'series' => $series_data,
+            'xaxis' => [
+                'type' => 'datetime',
+                'categories' => $date_categories
+            ]
+        ];
+
+        return new JsonResponse($chart_data);
     }
 
-    #[Route('/api/dashboard/total-facebook', name: 'dashboard_total_facebook')]
-    public function getTotalFacebook(TicketsRepository $ticketsRepository): JsonResponse
-    {
-        $total = $ticketsRepository->getTotalTicketsByType('facebook');
-
-        return new JsonResponse(['total' => $total]);
-    }
-
-    #[Route('/api/dashboard/total-app', name: 'dashboard_total_app')]
-    public function getTotalApp(TicketsRepository $ticketsRepository): JsonResponse
-    {
-        $total = $ticketsRepository->getTotalTicketsByType('app');
-
-        return new JsonResponse(['total' => $total]);
-    }
-
-    #[Route('/api/dashboard/total-http', name: 'dashboard_total_http')]
-    public function getTotalHttp(TicketsRepository $ticketsRepository): JsonResponse
-    {
-        $total = $ticketsRepository->getTotalTicketsByType('http');
-
-        return new JsonResponse(['total' => $total]);
-    }
-
-    #[Route('/api/dashboard/total-yotpo', name: 'dashboard_total_yotpo')]
-    public function getTotalYotpo(TicketsRepository $ticketsRepository): JsonResponse
-    {
-        $total = $ticketsRepository->getTotalTicketsByType('yotpo');
-
-
-        return new JsonResponse(['total' => $total]);
-    }
 
     #[Route('/api/dashboard/total-tickets-per-month', name: 'dashboard_total_tickets_per_month')]
     public function getTotalTicketsPerMonth(TicketsRepository $ticketsRepository): JsonResponse
@@ -225,11 +246,137 @@ class TicketsController extends AbstractController
         return new JsonResponse($stats);
     }
 
-    public function getTotalTicketsPerMarket(TicketsRepository $ticketsRepository): JsonResponse
+    #[Route('/api/productivity/cm', name: 'get_productivity_cm', methods: ['post'])]
+    public function getProductivityCM(Request $request, TicketsRepository $repository, UserProductivityRepository $userProductivityRepository): JsonResponse
     {
-        $data = $ticketsRepository->getTotalTicketsPerMarket();
+        $ticketData = $repository->getTicketStatisticsByUserCM();
+        $productivityData = [];
+        // Step 1: Get the raw JSON data from the request body
+        $data = json_decode($request->getContent(), true);
 
-        return new JsonResponse($data);
+        // Step 2: Extract start_date and end_date from the decoded JSON data
+        $startDatePost = $data['start_date'] ?? null;
+        $endDatePost = $data['end_date'] ?? null;
+
+        // Debugging output to check the extracted dates
+        // Step 2: Define default date range (last month) if no dates are provided
+        $dateNow = new \DateTime(); // Current date
+        $startDate = (clone $dateNow)->modify('first day of last month')->setTime(0, 0, 0); // First day of last month
+        $endDate = (clone $dateNow)->modify('last day of last month')->setTime(23, 59, 59); // Last day of last month
+
+        // Step 3: Override default dates if POST parameters are provided
+        if ($startDatePost) {
+            $startDate = \DateTime::createFromFormat('Y-m-d', $startDatePost)->setTime(0, 0, 0);
+        }
+        if ($endDatePost) {
+            $endDate = \DateTime::createFromFormat('Y-m-d', $endDatePost)->setTime(23, 59, 59);
+        }
+
+        dump($startDate);
+        dump($endDate);
+        // Step 3: Loop through each user’s ticket data and gather additional productivity metrics
+        foreach ($ticketData as $user) {
+            $userId = $user['id'];
+
+            $qb = $userProductivityRepository->createQueryBuilder('up')
+                ->where('up.user = :userId')
+                ->andWhere('up.dateDebut >= :startDate')
+                ->andWhere('up.dateFin <= :endDate')
+                ->setParameter('userId', $userId)
+                ->setParameter('startDate', $startDate)
+                ->setParameter('endDate', $endDate);
+
+            $productivityRecords = $qb->getQuery()->getResult();
+
+
+            if ($productivityRecords) {
+                foreach ($productivityRecords as $productivityRecord) {
+                    // Gather and calculate the required metrics
+                    $daysWorked = $productivityRecord->getDateDebut()->diff($productivityRecord->getDateFin())->days;
+                    $estimatedOnlineTime = $productivityRecord->getEstimatedOnlineTime();
+                    $occupancyPercentage = ($productivityRecord->getOccupancyRate() / 480) * 100;
+
+                    // Collect the data for this user
+                    $productivityData[] = [
+                        'id' => $userId,
+                        'user_name' => $user['user_name'],
+                        'facebook' => $user['facebook'],
+                        'instagram' => $user['instagram'],
+                        'comment_instagram' => $user['comment_instagram'],
+                        'tiktok' => $user['tiktok'],
+                        'gorgias' => $user['gorgias'],
+                        'yotpo' => $user['yotpo'],
+                        'total_CM' => $user['total_CM'],
+                        'nbr_days_worked' => $daysWorked,
+                        'estimated_online_time' => $estimatedOnlineTime,
+                        'occupancy_percentage' => $occupancyPercentage,
+//                        'Obj à traiter CM' => $productivityRecord->getAverageSurveyScore(),
+//                        'Taux d’attente Obj Nbr de msg CM' => $waitingRate,
+                        'total_CM' => $user['total_CM'],
+                    ];
+                }
+            }
+        }
+        return $this->json($productivityData);
+    }
+    #[Route('/api/productivity/customer-care', name: 'get_productivity_customer_care', methods: ['post'])]
+    public function getProductivityCustomerCare(Request $request, TicketsRepository $repository, UserProductivityRepository $userProductivityRepository): JsonResponse
+    {
+        $ticketData = $repository->getTicketStatisticsByUserCustomerCare('Customer Care'); // On filtre par l'équipe Customer Care
+//        dd($ticketData);
+        $productivityData = [];
+        $data = json_decode($request->getContent(), true);
+
+        $startDatePost = $data['start_date'] ?? null;
+        $endDatePost = $data['end_date'] ?? null;
+
+        $dateNow = new \DateTime();
+        $startDate = (clone $dateNow)->modify('first day of last month')->setTime(0, 0, 0);
+        $endDate = (clone $dateNow)->modify('last day of last month')->setTime(23, 59, 59);
+
+        if ($startDatePost) {
+            $startDate = \DateTime::createFromFormat('Y-m-d', $startDatePost)->setTime(0, 0, 0);
+        }
+        if ($endDatePost) {
+            $endDate = \DateTime::createFromFormat('Y-m-d', $endDatePost)->setTime(23, 59, 59);
+        }
+
+        foreach ($ticketData as $user) {
+            $userId = $user['id'];
+
+            $qb = $userProductivityRepository->createQueryBuilder('up')
+                ->where('up.user = :userId')
+                ->andWhere('up.dateDebut >= :startDate')
+                ->andWhere('up.dateFin <= :endDate')
+                ->setParameter('userId', $userId)
+                ->setParameter('startDate', $startDate)
+                ->setParameter('endDate', $endDate);
+
+            $productivityRecords = $qb->getQuery()->getResult();
+
+            if ($productivityRecords) {
+                foreach ($productivityRecords as $productivityRecord) {
+                    $daysWorked = $productivityRecord->getDateDebut()->diff($productivityRecord->getDateFin())->days;
+                    $estimatedOnlineTime = $productivityRecord->getEstimatedOnlineTime();
+                    $occupancyPercentage = ($productivityRecord->getOccupancyRate() / 480) * 100;
+
+                    $productivityData[] = [
+                        'id' => $userId,
+                        'user_name' => $user['user_name'],
+                        'mail' => $user['mail'],            // Nombre de mails traités
+                        'whatsapp' => $user['whatsapp'],    // Nombre de WhatsApp traités
+                        'chat' => $user['chat'],            // Nombre de chats traités
+                        'total_treated' => $user['ticketCount'],  // Total des tickets traités
+                        'nbr_days_worked' => $daysWorked,
+                        'estimated_online_time' => $estimatedOnlineTime,
+                        'occupancy_percentage' => $occupancyPercentage,
+                        'nbr_surveys' => $productivityRecord->getSurveyCount(),
+                        'average_satisfaction_score' => $productivityRecord->getAverageSurveyScore(),
+                    ];
+                }
+            }
+        }
+        return $this->json($productivityData);
     }
 
 
